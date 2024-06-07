@@ -12,7 +12,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    --shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    --shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
 }
 
 html,
@@ -23,7 +23,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #434343;
+    background-color: #3f3f3f;
 }
 
 #app {
@@ -33,9 +33,10 @@ body {
     position: relative;
 }
 
-#container {
+.container {
     position: absolute;
-    inset: 25px;
+    inset: 10px;
+    bottom: 50px;
 }
 
 @media (min-aspect-ratio: 4/3) {
@@ -48,10 +49,26 @@ body {
 }
 
 canvas {
-    background-color: rgb(140, 140, 140);
+    background-color: #606060;
     box-shadow: var(--shadow);
     width: 100%;
     height: 100%;
+}
+
+.point-counter {
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+}
+
+#points {
+    margin: 0;
+    text-align: center;
+    font-weight: bold;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    font-size: 24px;
 }
 
 #select-controller {
