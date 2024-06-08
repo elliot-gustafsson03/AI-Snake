@@ -10,9 +10,10 @@ import { HEIGHT, PIXEL, WIDTH } from './Constants'
 import Apple from './Apple'
 
 class SnakeGame {
-    private context: CanvasRenderingContext2D
-    private controller: Controller
-    private fps: number
+    context: CanvasRenderingContext2D
+    controller: Controller
+    fps: number
+    gameOverCallback: () => void
 
     private interval: number | undefined
     private snake: Snake | undefined
@@ -23,11 +24,13 @@ class SnakeGame {
     constructor(
         context: CanvasRenderingContext2D,
         controller: Controller,
-        fps: number
+        fps: number,
+        newGeneration: () => void
     ) {
         this.context = context
         this.controller = controller
         this.fps = fps
+        this.gameOverCallback = newGeneration
     }
 
     start(): void {
@@ -43,7 +46,11 @@ class SnakeGame {
     }
 
     move(): void {
-        this.snake!.move(this.controller.getNewVelocity())
+        this.snake!.vel = this.controller.getNewVelocity({
+            snake: this.snake!,
+            apple: this.apple!,
+        })
+        this.snake!.move()
     }
 
     render(): void {
@@ -53,13 +60,13 @@ class SnakeGame {
         // Draw apple
         this.fillPixel(this.apple!.getPos(), this.apple!.getColor())
 
-        // Draw snake head
-        this.fillPixel(this.snake!.getPos(), this.snake!.getColor())
-
         // Draw snake body
         this.snake!.tail.forEach((segment) => {
             this.fillPixel(segment.pos, segment.color)
         })
+
+        // Draw snake head
+        this.fillPixel(this.snake!.getPos(), this.snake!.getColor())
     }
 
     fillPixel(pos: position, color: string): void {
@@ -122,7 +129,8 @@ class SnakeGame {
 
     gameOver() {
         clearInterval(this.interval)
-        alert('Game Over!')
+        document.querySelector<HTMLElement>('#points')!.innerHTML = 'Points: 0'
+        this.gameOverCallback()
     }
 }
 

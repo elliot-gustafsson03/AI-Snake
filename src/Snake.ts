@@ -7,6 +7,8 @@ class Snake extends Entity {
     protected color: string
     tail: tailSegment[]
 
+    public vel: velocity = { x: 0, y: 0 }
+
     constructor() {
         super()
         this.pos = { x: WIDTH / 2, y: HEIGHT / 2 }
@@ -14,7 +16,7 @@ class Snake extends Entity {
         this.tail = []
     }
 
-    move(vel: velocity) {
+    move() {
         if (this.tail.length > 0) {
             for (let i = this.tail.length - 1; i > 0; i--) {
                 this.tail[i].pos = Object.assign({}, this.tail[i - 1].pos)
@@ -23,7 +25,7 @@ class Snake extends Entity {
             this.tail[0].pos = Object.assign({}, this.pos)
         }
 
-        this.pos = { x: this.pos.x + vel.x, y: this.pos.y + vel.y }
+        this.pos = { x: this.pos.x + this.vel.x, y: this.pos.y + this.vel.y }
     }
 
     grow() {

@@ -60,15 +60,16 @@ canvas {
     bottom: 10px;
     left: 0;
     right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
 }
 
-#points {
-    margin: 0;
-    text-align: center;
+.point-counter span {
     font-weight: bold;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 #select-controller {
@@ -78,11 +79,17 @@ canvas {
     text-align: center;
 }
 
-#select-controller div {
+.center-container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+input[type='number'] {
+    margin-left: 6px;
+    padding: 4px;
+    width: 70px;
 }
 
 #select-controller ul {

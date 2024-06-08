@@ -1,9 +1,9 @@
 import Controller from './Controller'
 import { velocity } from './Position'
+import { stateInfo } from './StateManager'
 
 class KeyboardController extends Controller {
     lastKey: string = ''
-    prevVel: velocity = { x: 0, y: 0 }
 
     constructor() {
         super()
@@ -16,35 +16,32 @@ class KeyboardController extends Controller {
         })
     }
 
-    getNewVelocity(): velocity {
-        let newVelocity = { x: 0, y: 0 }
+    getNewVelocity(state: stateInfo): velocity {
+        let prevVel = state.snake.vel
+        let newVel = { x: 0, y: 0 }
 
         switch (this.lastKey) {
             case 'ArrowUp':
-                newVelocity.y = -1
+                newVel.y = -1
                 break
             case 'ArrowDown':
-                newVelocity.y = 1
+                newVel.y = 1
                 break
             case 'ArrowLeft':
-                newVelocity.x = -1
+                newVel.x = -1
                 break
             case 'ArrowRight':
-                newVelocity.x = 1
+                newVel.x = 1
                 break
             default:
-                return this.prevVel
+                return prevVel
         }
 
-        if (
-            newVelocity.x == -this.prevVel &&
-            newVelocity.y == -this.prevVel.y
-        ) {
-            return this.prevVel
+        if (newVel.x == -prevVel.x && newVel.y == -prevVel.y) {
+            return prevVel
         }
 
-        this.prevVel = newVelocity
-        return newVelocity
+        return newVel
     }
 }
 
