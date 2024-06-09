@@ -4,6 +4,8 @@ import KeyboardController from './KeyboardController'
 
 let game: SnakeGame | undefined
 let generation = 1
+let highscore = 0
+let pause = false
 
 function startGame(controller: Controller) {
     let fps = +document.querySelector<HTMLInputElement>('#fps')!.value
@@ -15,10 +17,17 @@ function startGame(controller: Controller) {
     game.start()
 }
 
-function newGeneration() {
+function newGeneration(score: number) {
     document.querySelector(
         '#generation'
     )!.innerHTML = `Generation ${++generation}`
+
+    if (score > highscore) {
+        highscore = score
+        document.querySelector<HTMLElement>(
+            '#highscore'
+        )!.innerHTML = `Highscore: ${highscore}`
+    }
 
     let context = game!.context
     let controller = game!.controller
@@ -32,4 +41,20 @@ document
     .querySelector<HTMLElement>('#keyboard-input')
     ?.addEventListener('click', () => {
         startGame(new KeyboardController())
+    })
+
+document
+    .querySelector<HTMLElement>('#pause-btn')
+    ?.addEventListener('click', () => {
+        let source = ''
+        if (pause) {
+            source = '/pause.svg'
+            game?.resume()
+        } else {
+            source = '/play.svg'
+            game?.pause()
+        }
+
+        document.querySelector<HTMLImageElement>('#pause-btn')!.src = source
+        pause = !pause
     })

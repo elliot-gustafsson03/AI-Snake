@@ -13,7 +13,7 @@ class SnakeGame {
     context: CanvasRenderingContext2D
     controller: Controller
     fps: number
-    gameOverCallback: () => void
+    gameOverCallback: (score: number) => void
 
     private interval: number | undefined
     private snake: Snake | undefined
@@ -25,7 +25,7 @@ class SnakeGame {
         context: CanvasRenderingContext2D,
         controller: Controller,
         fps: number,
-        newGeneration: () => void
+        newGeneration: (score: number) => void
     ) {
         this.context = context
         this.controller = controller
@@ -36,6 +36,10 @@ class SnakeGame {
     start(): void {
         this.snake = new Snake()
         this.apple = this.spawnApple()
+        this.setUpdate()
+    }
+
+    setUpdate() {
         this.interval = setInterval(this.update.bind(this), 1000 / this.fps)
     }
 
@@ -130,7 +134,15 @@ class SnakeGame {
     gameOver() {
         clearInterval(this.interval)
         document.querySelector<HTMLElement>('#points')!.innerHTML = 'Points: 0'
-        this.gameOverCallback()
+        this.gameOverCallback(this.points)
+    }
+
+    pause() {
+        clearInterval(this.interval)
+    }
+
+    resume() {
+        this.setUpdate()
     }
 }
 
