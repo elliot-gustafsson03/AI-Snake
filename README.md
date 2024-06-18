@@ -2,6 +2,12 @@
 
 This is a simple implementation of the classic game "Snake", which can be controlled either by keyboard or a reinforcement learning-model.
 
+---
+
+Note that the reinforcement learning is still a bit "hit or miss". Learning is based soley on probability, and therefore the speed of learning depends a bit on luck. This may be fixed by tweaking the explore-rate among other properties.
+
+---
+
 ## Installation
 
 Running and developing this program requires the [Bun javascript runtime](https://github.com/oven-sh/bun). After cloning this repository, navigate into the top directory and run:

@@ -42,7 +42,7 @@ class AIController extends Controller {
     }
 
     reduceExploreRate(highscore: number): void {
-        this.exploreRate = 0.5 * Math.pow(0.9, highscore)
+        this.exploreRate = 0.5 * Math.pow(0.75, highscore)
         console.log(this.exploreRate)
     }
 
