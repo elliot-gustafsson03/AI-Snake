@@ -17,6 +17,7 @@ class SnakeGame {
     gameOverCallback: (score: number) => void
 
     private interval: number | undefined
+    private punishInterval: number | undefined
     private snake: Snake | undefined
     private apple: Apple | undefined
 
@@ -110,6 +111,12 @@ class SnakeGame {
     }
 
     spawnApple(): Apple {
+        clearInterval(this.punishInterval)
+        this.punishInterval = setInterval(
+            () => this.controller.reward(-1),
+            1000 * 5
+        )
+
         return new Apple(
             randomPosition([
                 this.snake!.getPos(),
@@ -119,7 +126,7 @@ class SnakeGame {
     }
 
     eatApple() {
-        this.controller.reward()
+        this.controller.reward(5)
 
         document.querySelector<HTMLElement>(
             '#points'
@@ -130,9 +137,10 @@ class SnakeGame {
     }
 
     gameOver() {
-        this.controller.punish()
+        this.controller.reward(-5)
 
         clearInterval(this.interval)
+        clearInterval(this.punishInterval)
         document.querySelector<HTMLElement>('#points')!.innerHTML = 'Points: 0'
         this.gameOverCallback(this.points)
     }

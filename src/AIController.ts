@@ -42,16 +42,13 @@ class AIController extends Controller {
     }
 
     reduceExploreRate(highscore: number): void {
-        this.exploreRate = 0.5 * Math.pow(0.75, highscore)
+        this.exploreRate = 0.1 * Math.pow(0.9, highscore)
         console.log(this.exploreRate)
     }
 
-    reward(): void {
-        if (this.prevState) this.qTable.addWeight(this.prevState, 1)
-    }
-
-    punish(): void {
-        if (this.prevState) this.qTable.addWeight(this.prevState, -1)
+    reward(reward: number): void {
+        console.log(reward)
+        if (this.prevState) this.qTable.addWeight(this.prevState, reward)
     }
 }
 

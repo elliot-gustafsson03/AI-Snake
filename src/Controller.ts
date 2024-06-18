@@ -3,8 +3,7 @@ import { stateInfo } from './StateManager'
 
 abstract class Controller {
     abstract getNewVelocity(state: stateInfo): velocity
-    abstract reward(): void
-    abstract punish(): void
+    abstract reward(reward: number): void
 }
 
 export default Controller

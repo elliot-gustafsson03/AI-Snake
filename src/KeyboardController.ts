@@ -46,11 +46,7 @@ class KeyboardController extends Controller {
     }
 
     reward(): void {
-        console.log('Good job!')
-    }
-
-    punish(): void {
-        console.log('Too bad!')
+        return
     }
 }
 

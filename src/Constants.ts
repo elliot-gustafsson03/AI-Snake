@@ -1,5 +1,5 @@
-const WIDTH = 28
-const HEIGHT = 21
+const WIDTH = 24
+const HEIGHT = 18
 const PIXEL = 10
 
 export { WIDTH, HEIGHT, PIXEL }
