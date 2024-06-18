@@ -10,6 +10,10 @@ interface velocity {
     y: number
 }
 
+function outsideMap(pos: position): boolean {
+    return pos.x < 0 || pos.x >= WIDTH || pos.y < 0 || pos.y >= HEIGHT
+}
+
 function randomPosition(ignore: position[]): position {
     while (true) {
         let randomPos = {
@@ -37,5 +41,45 @@ function positionEquals(pos1: position, pos2: position): boolean {
     return pos1.x == pos2.x && pos1.y == pos2.y
 }
 
+function velocityEquals(vel1: velocity, vel2: velocity): boolean {
+    return positionEquals(vel1, vel2)
+}
+
+function deltaPosition(pos1: position, pos2: position): velocity {
+    return { x: pos1.x - pos2.x, y: pos1.y - pos2.y }
+}
+
+function movePosition(pos: position, vel: velocity): position {
+    return { x: pos.x + vel.x, y: pos.y + vel.y }
+}
+
+function statndingStill(vel: velocity): boolean {
+    return vel.x == 0 && vel.y == 0
+}
+
+function rotateLeft(vel: velocity): velocity {
+    return { x: vel.y, y: -vel.x }
+}
+
+function rotateRight(vel: velocity) {
+    return { x: -vel.y, y: vel.x }
+}
+
+function reverseVelocity(vel: velocity) {
+    return { x: -vel.x, y: -vel.y }
+}
+
 export type { position, velocity }
-export { randomPosition, containsPosition, positionEquals }
+export {
+    outsideMap,
+    randomPosition,
+    containsPosition,
+    positionEquals,
+    velocityEquals,
+    deltaPosition,
+    movePosition,
+    statndingStill,
+    rotateLeft,
+    rotateRight,
+    reverseVelocity,
+}

@@ -1,5 +1,5 @@
 import Entity from './Entity'
-import { position, velocity } from './Position'
+import { movePosition, position, velocity } from './Position'
 import { WIDTH, HEIGHT } from './Constants'
 
 class Snake extends Entity {
@@ -11,7 +11,7 @@ class Snake extends Entity {
 
     constructor() {
         super()
-        this.pos = { x: WIDTH / 2, y: HEIGHT / 2 }
+        this.pos = { x: Math.floor(WIDTH / 2), y: Math.floor(HEIGHT / 2) }
         this.color = '#ffffff'
         this.tail = []
     }
@@ -25,7 +25,7 @@ class Snake extends Entity {
             this.tail[0].pos = Object.assign({}, this.pos)
         }
 
-        this.pos = { x: this.pos.x + this.vel.x, y: this.pos.y + this.vel.y }
+        this.pos = movePosition(this.pos, this.vel)
     }
 
     grow() {

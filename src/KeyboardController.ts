@@ -1,6 +1,6 @@
 import Controller from './Controller'
 import { velocity } from './Position'
-import { stateInfo } from './StateManager'
+import { getStateIndex, stateInfo } from './StateManager'
 
 class KeyboardController extends Controller {
     lastKey: string = ''
@@ -17,6 +17,7 @@ class KeyboardController extends Controller {
     }
 
     getNewVelocity(state: stateInfo): velocity {
+        getStateIndex(state)
         let prevVel = state.snake.vel
         let newVel = { x: 0, y: 0 }
 
@@ -42,6 +43,14 @@ class KeyboardController extends Controller {
         }
 
         return newVel
+    }
+
+    reward(): void {
+        console.log('Good job!')
+    }
+
+    punish(): void {
+        console.log('Too bad!')
     }
 }
 

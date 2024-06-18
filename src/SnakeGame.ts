@@ -5,6 +5,7 @@ import {
     randomPosition,
     positionEquals,
     containsPosition,
+    outsideMap,
 } from './Position'
 import { HEIGHT, PIXEL, WIDTH } from './Constants'
 import Apple from './Apple'
@@ -91,12 +92,7 @@ class SnakeGame {
         }
 
         // Check out of bounds
-        if (
-            this.snake!.getPos().x < 0 ||
-            this.snake!.getPos().x >= WIDTH ||
-            this.snake!.getPos().y < 0 ||
-            this.snake!.getPos().y >= HEIGHT
-        ) {
+        if (outsideMap(this.snake!.getPos())) {
             this.gameOver()
             return
         }
@@ -123,6 +119,8 @@ class SnakeGame {
     }
 
     eatApple() {
+        this.controller.reward()
+
         document.querySelector<HTMLElement>(
             '#points'
         )!.innerHTML = `Points: ${++this.points}`
@@ -132,6 +130,8 @@ class SnakeGame {
     }
 
     gameOver() {
+        this.controller.punish()
+
         clearInterval(this.interval)
         document.querySelector<HTMLElement>('#points')!.innerHTML = 'Points: 0'
         this.gameOverCallback(this.points)

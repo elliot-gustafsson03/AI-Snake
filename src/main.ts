@@ -1,6 +1,7 @@
 import SnakeGame from './SnakeGame'
 import Controller from './Controller'
 import KeyboardController from './KeyboardController'
+import AIController from './AIController'
 
 let game: SnakeGame | undefined
 let generation = 1
@@ -33,6 +34,10 @@ function newGeneration(score: number) {
     let controller = game!.controller
     let fps = game!.fps
 
+    if (controller instanceof AIController) {
+        ;(controller as AIController).reduceExploreRate()
+    }
+
     game = new SnakeGame(context, controller, fps, newGeneration)
     game.start()
 }
@@ -41,6 +46,12 @@ document
     .querySelector<HTMLElement>('#keyboard-input')
     ?.addEventListener('click', () => {
         startGame(new KeyboardController())
+    })
+
+document
+    .querySelector<HTMLElement>('#ai-input')
+    ?.addEventListener('click', () => {
+        startGame(new AIController())
     })
 
 document
