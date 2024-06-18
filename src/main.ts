@@ -59,10 +59,10 @@ document
     ?.addEventListener('click', () => {
         let source = ''
         if (pause) {
-            source = '/pause.svg'
+            source = 'pause.svg'
             game?.resume()
         } else {
-            source = '/play.svg'
+            source = 'play.svg'
             game?.pause()
         }
 
