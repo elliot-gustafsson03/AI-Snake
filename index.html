@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link type="text/css" rel="stylesheet" href="/ai-snake/style.css" />
+        <link rel="shortcut icon" href="#" />
+        <title>AI Snake</title>
+      <script type="module" crossorigin src="/ai-snake/assets/index-BrqvGMND.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div class="container">
+                <canvas width="280" height="210"></canvas>
+            </div>
+            <div class="menu">
+                <img src="/ai-snake/pause.svg" id="pause-btn" />
+                <p id="highscore">Highscore: 0</p>
+            </div>
+            <div class="point-counter">
+                <span id="points">Points: 0</span>
+                <span id="generation">Generation: 1</span>
+            </div>
+            <div id="select-controller">
+                <div class="center-container">
+                    <div style="margin-bottom: 50px">
+                        <label>FPS:</label>
+                        <input
+                            type="number"
+                            id="fps"
+                            value="12"
+                            min="1"
+                            max="1000"
+                        />
+                    </div>
+                    <h2>How would you like to control the snake?</h2>
+                    <ul>
+                        <li id="keyboard-input">Keyboard Input</li>
+                        <li id="ai-input">Reinforcement Learning</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
