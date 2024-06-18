@@ -35,7 +35,7 @@ function newGeneration(score: number) {
     let fps = game!.fps
 
     if (controller instanceof AIController) {
-        ;(controller as AIController).reduceExploreRate()
+        ;(controller as AIController).reduceExploreRate(highscore)
     }
 
     game = new SnakeGame(context, controller, fps, newGeneration)

@@ -26,4 +26,4 @@ then open a web browser and navigate to [localhost on port 5173](http://localhos
 
 This AI-model uses a Q-table to store information about what it learns. Each row in the Q-table represents a state in the game. The columns represent the possible actions in that state (going left, forward or right) and each action has a weight. We will always pick the action with the greatest weight. Eating an apple (earning a point in the game) will increase the weight for the action that led to this. Similarly, Causing a game over will instead decrease that weight, making it less likely to be picked again.
 
-In addition to the Q-table, an explore-rate is used to make sure the snake explores the game (instead of getting stuck in loops). This explore-rate decreases exponentially with each new generation.
+In addition to the Q-table, an explore-rate is used to make sure the snake explores the game (instead of getting stuck in loops). This explore-rate decreases exponentially with the highscore.
